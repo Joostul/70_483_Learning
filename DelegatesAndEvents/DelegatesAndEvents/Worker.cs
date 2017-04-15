@@ -4,8 +4,6 @@ using System.Text;
 
 namespace DelegatesAndEvents
 {
-    //public delegate int WorkPerformedHandler(object sender, WorkPerformedEventArgs e);
-
     public class Worker
     {
         public event EventHandler<WorkPerformedEventArgs> WorkPerformed;
@@ -23,7 +21,6 @@ namespace DelegatesAndEvents
         protected virtual void OnWorkPerformed(int hours, WorkType workType)
         {
             (WorkPerformed as EventHandler<WorkPerformedEventArgs>)?.Invoke(this, new WorkPerformedEventArgs(hours, workType));
-            //(WorkPerformed as WorkPerformedEventArgs)?.Invoke(this, new WorkPerformedEventArgs(hours, workType));
         }
 
         protected virtual void OnWorkCompleted()
