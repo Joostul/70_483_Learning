@@ -6,7 +6,6 @@ namespace DelegatesAndEvents
     {
         static void Main(string[] args)
         {
-
             var worker = new Worker();
             worker.WorkPerformed += (sender, e) => 
                 Console.WriteLine($"On hour {e.Hours.ToString()} {e.WorkType.ToString()} was performed by {sender}.");
