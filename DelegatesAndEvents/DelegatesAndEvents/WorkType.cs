@@ -4,6 +4,8 @@
     {
         GoToMeetings,
         Golf,
-        GenerateReports
+        GenerateReports,
+        SoftwareEngineering,
+        ScrumMaster
     }
 }
