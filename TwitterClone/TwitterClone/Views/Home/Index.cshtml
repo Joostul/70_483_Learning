@@ -1,0 +1,30 @@
+﻿@model List<TwitterClone.ViewModel.TweetViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Tweets</h2>
+        @foreach (var tweet in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="#">@@@tweet.Person</a>
+                    <p>@tweet.Message</p>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Reply
+                    </button>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Retweet
+                    </button>
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
+                    </button>
+                    <div class="text-right" style="float:right">@tweet.DateTime.Date</div>                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
