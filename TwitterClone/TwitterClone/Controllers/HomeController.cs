@@ -31,7 +31,31 @@ namespace TwitterClone.Controllers
                 new Tweet()
                 {
                     Person = "JoostvanUitert",
-                    Message = "Fuck you World",
+                    Message = "Goodbye World",
+                    DateTime = DateTime.Now,
+                    Loves = 0,
+                    Retweets = 0
+                },
+                new Tweet()
+                {
+                    Person = "JoostvanUitert",
+                    Message = "Good to see you again World",
+                    DateTime = DateTime.Now,
+                    Loves = 0,
+                    Retweets = 0
+                },
+                new Tweet()
+                {
+                    Person = "JoostvanUitert",
+                    Message = "And again World",
+                    DateTime = DateTime.Now,
+                    Loves = 0,
+                    Retweets = 0
+                },
+                new Tweet()
+                {
+                    Person = "JoostvanUitert",
+                    Message = "Goodbye now then World",
                     DateTime = DateTime.Now,
                     Loves = 0,
                     Retweets = 0

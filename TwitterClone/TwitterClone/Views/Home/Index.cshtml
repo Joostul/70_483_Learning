@@ -5,13 +5,41 @@
 }
 
 <div class="row">
+    <p>
+
+    </p>
     <div class="col-md-6">
-        <h2>Tweets</h2>
+        <div class="panel panel-danger">
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" style="min-width: 100%" rows="4"></textarea>
+                    <button type="submit" class="btn btn-default">Tweet!</button>
+                </div>
+            </form>
+        </div>
+
         @foreach (var tweet in Model)
         {
-            <div class="panel panel-default">
+            <div class="panel panel-danger">
                 <div class="panel-body">
                     <a href="#">@@@tweet.Person</a>
+                    <div class="text-right" style="float:right">
+                        @if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours > 1)
+                        {
+                            @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours, 0)
+                            <text> hours ago</text>
+                        }
+                        else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalMinutes > 1)
+                        {
+                            @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalMinutes, 0)
+                            <text> minutes ago</text>
+                        }
+                        else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalSeconds > 1)
+                        {
+                            @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalSeconds, 0)
+                            <text> seconds ago</text>
+                        }
+                    </div>
                     <p>@tweet.Message</p>
                     <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Reply
@@ -22,7 +50,6 @@
                     <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like
                     </button>
-                    <div class="text-right" style="float:right">@tweet.DateTime.Date</div>                    
                 </div>
             </div>
         }
