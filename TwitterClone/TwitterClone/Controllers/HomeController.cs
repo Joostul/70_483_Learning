@@ -56,7 +56,7 @@ namespace TwitterClone.Controllers
                 {
                     Person = "JoostvanUitert",
                     Message = "Goodbye now then World",
-                    DateTime = DateTime.Now,
+                    DateTime = DateTime.MaxValue,
                     Loves = 0,
                     Retweets = 0
                 }
@@ -65,9 +65,27 @@ namespace TwitterClone.Controllers
             _tweets = _mapper.Map<List<Tweet>, List<TweetViewModel>>(Tweets);
         }
 
+        [HttpPost]
+        public IActionResult Index(TweetViewModel newTweet)
+        {
+            _tweets.Add(newTweet);
+
+            return View(_tweets);
+        }
+
+        [HttpPost]
+        public IActionResult Create(TweetViewModel newTweet)
+        {
+            _tweets.Add(newTweet);
+
+            return View(_tweets);
+        }
+
         public IActionResult Index()
         {
-            return View(_tweets);
+            var viewtweets = _tweets.OrderBy(t => t.DateTime);
+
+            return View(viewtweets.ToList());
         }
 
         public IActionResult About()

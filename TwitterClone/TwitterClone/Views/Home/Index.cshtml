@@ -13,18 +13,22 @@
             <form>
                 <div class="form-group">
                     <textarea class="form-control" style="min-width: 100%" rows="4"></textarea>
-                    <button type="submit" class="btn btn-default">Tweet!</button>
+                    <button type="submit" name="create" class="btn btn-default" >Tweet!</button>
                 </div>
             </form>
         </div>
-
         @foreach (var tweet in Model)
         {
             <div class="panel panel-danger">
                 <div class="panel-body">
                     <a href="#">@@@tweet.Person</a>
                     <div class="text-right" style="float:right">
-                        @if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours > 1)
+                        @if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalDays > 1)
+                        {
+                            @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalDays, 0)
+                            <text> hours ago</text>
+                        }
+                        else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours > 1)
                         {
                             @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours, 0)
                             <text> hours ago</text>
@@ -38,6 +42,9 @@
                         {
                             @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalSeconds, 0)
                             <text> seconds ago</text>
+                        } else
+                        {
+                            <text>A long time ago</text>
                         }
                     </div>
                     <p>@tweet.Message</p>
