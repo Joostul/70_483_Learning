@@ -34,7 +34,13 @@ namespace TwitterClone.Controllers
 
         public IActionResult Index()
         {
+
+
             var viewtweets = _service.GetTwitterMockData();
+
+            var sortedTweets = viewtweets.ListViewModel.TweetList.OrderByDescending(t => t.DateTime).ToList();
+
+            viewtweets.ListViewModel.TweetList = sortedTweets;
 
             return View(viewtweets);
         }
