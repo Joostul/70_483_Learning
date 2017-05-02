@@ -14,41 +14,18 @@
                 <div class="form-group">
                     <input asp-for="CreateViewModel.Message" class="form-control" style="min-width: 100%" rows="4" />
                     <span asp-validation-for="CreateViewModel.Message"></span>
-                    @*<button type="submit" name="Create" class="btn btn-default">Tweet!</button>*@
                     <input type="submit" value="Create" class="btn btn-default"/>
                 </div>
             </form>
     </div>
     @foreach (var tweet in Model.ListViewModel.TweetList)
     {
+
         <div class="panel panel-danger">
             <div class="panel-body">
                 <a href="#">@@@tweet.Person</a>
                 <div class="text-right" style="float:right">
-                    @if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalDays > 1)
-                    {
-                        @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalDays, 0)
-                        <text> days ago</text>
-                    }
-                    else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours > 1)
-                    {
-                        @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalHours, 0)
-                        <text> hours ago</text>
-                    }
-                    else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalMinutes > 1)
-                    {
-                        @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalMinutes, 0)
-                        <text> minutes ago</text>
-                    }
-                    else if (DateTime.Now.Subtract(tweet.DateTime.Date).TotalSeconds > 1)
-                    {
-                        @Math.Round(DateTime.Now.Subtract(tweet.DateTime.Date).TotalSeconds, 0)
-                        <text> seconds ago</text>
-                    }
-                    else
-                    {
-                        <text>A long time ago</text>
-                    }
+                    @TimeAgoCalculater.Calculate(tweet.DateTime)
                 </div>
                 <p>@tweet.Message</p>
                 <button type="button" class="btn btn-default">

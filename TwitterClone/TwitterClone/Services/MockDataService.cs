@@ -54,7 +54,7 @@ namespace TwitterClone.Services
                         {
                             Person = "JoostvanUitert",
                             Message = "Goodbye now then World",
-                            DateTime = DateTime.MaxValue,
+                            DateTime = DateTime.Now.AddDays(-1),
                             Loves = 0,
                             Retweets = 0
                         }
