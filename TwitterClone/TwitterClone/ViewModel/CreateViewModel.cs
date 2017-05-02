@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TwitterClone.Model;
 
 namespace TwitterClone.ViewModel
 {
-    public class TweetViewModel
+    public class CreateViewModel
     {
         public string Person { get; set; }
         public string Message { get; set; }

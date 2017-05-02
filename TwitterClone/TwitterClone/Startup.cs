@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
+using TwitterClone.Services;
 
 namespace TwitterClone
 {
@@ -29,6 +30,7 @@ namespace TwitterClone
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddSingleton<IMockDataService, MockDataService>();
             services.AddMvc();
             services.AddAutoMapper();
         }

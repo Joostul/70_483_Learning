@@ -12,8 +12,8 @@ namespace TwitterClone.AutoMapper
     {
         public MappingProfile()
         {
-            CreateMap<Tweet, TweetViewModel>();
-            CreateMap<TweetViewModel, Tweet>()
+            CreateMap<Tweet, ListCreateTweetViewModel>();
+            CreateMap<ListCreateTweetViewModel, Tweet>()
                 .ForMember(t => t.Id, opt => opt.Ignore());
         }
     }

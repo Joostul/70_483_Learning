@@ -6,86 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using TwitterClone.Model;
 using TwitterClone.ViewModel;
 using AutoMapper;
+using TwitterClone.Services;
 
 namespace TwitterClone.Controllers
 {
     public class HomeController : Controller
     {
-        private List<TweetViewModel> _tweets { get; set; }
-        private readonly IMapper _mapper;
+        private IMockDataService _service;
 
-        public HomeController(IMapper Mapper)
+        public HomeController(IMockDataService service)
         {
-            _mapper = Mapper;
-
-            var Tweets = new List<Tweet>()
-            {
-                new Tweet()
-                {
-                    Person = "JoostvanUitert",
-                    Message = "Hello World",
-                    DateTime = DateTime.Now,
-                    Loves = 0,
-                    Retweets = 0
-                },
-                new Tweet()
-                {
-                    Person = "JoostvanUitert",
-                    Message = "Goodbye World",
-                    DateTime = DateTime.Now,
-                    Loves = 0,
-                    Retweets = 0
-                },
-                new Tweet()
-                {
-                    Person = "JoostvanUitert",
-                    Message = "Good to see you again World",
-                    DateTime = DateTime.Now,
-                    Loves = 0,
-                    Retweets = 0
-                },
-                new Tweet()
-                {
-                    Person = "JoostvanUitert",
-                    Message = "And again World",
-                    DateTime = DateTime.Now,
-                    Loves = 0,
-                    Retweets = 0
-                },
-                new Tweet()
-                {
-                    Person = "JoostvanUitert",
-                    Message = "Goodbye now then World",
-                    DateTime = DateTime.MaxValue,
-                    Loves = 0,
-                    Retweets = 0
-                }
-            };
-
-            _tweets = _mapper.Map<List<Tweet>, List<TweetViewModel>>(Tweets);
+            _service = service;
         }
 
         [HttpPost]
-        public IActionResult Index(TweetViewModel newTweet)
+        public IActionResult Index(ListCreateTweetViewModel newTweet)
         {
-            _tweets.Add(newTweet);
+            newTweet.CreateViewModel.DateTime = DateTime.Now;
+            newTweet.CreateViewModel.Loves = 0;
+            newTweet.CreateViewModel.Person = "JoostNew";
+            newTweet.CreateViewModel.Retweets = 0;
 
-            return View(_tweets);
-        }
+            _service.AddNewTweet(newTweet.CreateViewModel);
 
-        [HttpPost]
-        public IActionResult Create(TweetViewModel newTweet)
-        {
-            _tweets.Add(newTweet);
-
-            return View(_tweets);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Index()
         {
-            var viewtweets = _tweets.OrderBy(t => t.DateTime);
+            var viewtweets = _service.GetTwitterMockData();
 
-            return View(viewtweets.ToList());
+            return View(viewtweets);
         }
 
         public IActionResult About()
